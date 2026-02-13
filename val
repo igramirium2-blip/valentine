@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be My Valentine Liah 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Fullscreen overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+    }
+
+    .open-btn {
+      margin-top: 20px;
+      padding: 15px 35px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      background: white;
+      color: #ff3e6c;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .open-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      animation: float 3s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+      display: none;
+    }
+
+    h1 {
+      color: #ff3e6c;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      position: relative;
+      height: 80px;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #ff3e6c;
+      color: white;
+      transition: 0.3s;
+      position: absolute;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background-color: #ff1e50;
+    }
+
+    #yesBtn { left: 20%; }
+    #noBtn { left: 60%; }
+
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #444;
+      display: none;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .heart-fall {
+      position: absolute;
+      font-size: 20px;
+      animation: fall linear infinite;
+      color: #ff3e6c;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+
+    .teddy {
+      font-size: 90px;
+      position: relative;
+      margin-top: 15px;
+    }
+
+    .teddy-heart {
+      position: absolute;
+      top: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 35px;
+    }
+
+    .name-on-heart {
+      position: absolute;
+      top: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Opening overlay -->
+  <div class="overlay" id="overlay">
+    <h1>💌 A Valentine Card For You 💌</h1>
+    <button class="open-btn" onclick="openCard()">Open 💖</button>
+  </div>
+
+  <!-- Card -->
+  <div class="card" id="card">
+    <h1>Liah, will you be my Valentine? 💕</h1>
+
+    <div class="teddy">
+      🧸
+      <div class="teddy-heart">❤️</div>
+      <div class="name-on-heart">Liah</div>
+    </div>
+
+    <div class="buttons">
+      <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+      <button id="noBtn" onmouseover="moveNo()">No 😢</button>
+    </div>
+
+    <div id="message">
+      YAY!!! I knew you'd say yes, Liah! 💘💞
+    </div>
+  </div>
+
+  <script>
+    function openCard() {
+      document.getElementById("overlay").style.display = "none";
+      document.getElementById("card").style.display = "block";
+
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+    }
+
+    function sayYes() {
+      document.getElementById("message").style.display = "block";
+    }
+
+    function moveNo() {
+      const btn = document.getElementById("noBtn");
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart-fall");
+      heart.innerHTML = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
